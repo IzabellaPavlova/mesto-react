@@ -3,8 +3,8 @@ import Card from './Card.js';
 import api from '../utils/api.js';
 
 function Main(props) {
-  const[userInfo, setUserInfo] = React.useState({})
-  const[cards, setCards] = React.useState([])
+  const [userInfo, setUserInfo] = React.useState({})
+  const [cards, setCards] = React.useState([])
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()]).then(([userData, cards]) => {
@@ -21,7 +21,7 @@ function Main(props) {
         <div className="profile__user-card">
           <button className="profile__edit-avatar-button" type="button"
             title="Обновить аватар" onClick={props.onEditAvatar}>
-              <img className="profile__avatar" src={userInfo.avatar} alt="Аватар
+            <img className="profile__avatar" src={userInfo.avatar} alt="Аватар
               пользователя Место"/></button>
           <div className="profile__info">
             <h1 className="profile__name">{userInfo.name}</h1>

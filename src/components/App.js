@@ -6,10 +6,10 @@ import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
 
 function App() {
-  const[isProfilePopupOpen, setIsProfilePopupOpen] = React.useState(false)
-  const[isAddCardPopupOpen, setIsAddCardPopupOpen] = React.useState(false)
-  const[isAvatarPopupOpen, setIsAvatarPopupOpen] = React.useState(false)
-  const[selectedCard, setSelectedCard] = React.useState(null)
+  const [isProfilePopupOpen, setIsProfilePopupOpen] = React.useState(false)
+  const [isAddCardPopupOpen, setIsAddCardPopupOpen] = React.useState(false)
+  const [isAvatarPopupOpen, setIsAvatarPopupOpen] = React.useState(false)
+  const [selectedCard, setSelectedCard] = React.useState(null)
 
   function handleEditProfileClick() {
     setIsProfilePopupOpen(true);
@@ -57,14 +57,14 @@ function App() {
               <label className="form__field">
                 <input className="form__input form__input_text-profile_name"
                   type="text" name="name" placeholder="Имя" required
-                  minLength="2" maxLength="40" id="profile-name"/>
+                  minLength="2" maxLength="40" id="profile-name" />
                 <span className="form__input-error profile-name-error"></span>
               </label>
               <label className="form__field">
                 <input className="form__input form__input_text-profile_description"
                   type="text" name="description" placeholder="Описание"
                   required minLength="2" maxLength="200"
-                  id="profile-description"/>
+                  id="profile-description" />
                 <span className="form__input-error profile-description-error">Error
                   is here</span>
               </label>
@@ -84,14 +84,14 @@ function App() {
                 <input className="form__input form__input_text-add-card_name"
                   type="text" name="name" placeholder="Название"
                   required
-                  minLength="2" maxLength="30" id="card-name"/>
+                  minLength="2" maxLength="30" id="card-name" />
                 <span className="form__input-error card-name-error"></span>
               </label>
               <label className="form__field">
                 <input className="form__input form__input_text-add-card_link"
                   type="url" name="link"
                   placeholder="Ссылка&nbsp;на&nbsp;картинку" required
-                  id="card-description"/>
+                  id="card-description" />
                 <span className="form__input-error card-description-error"></span>
               </label>
             </fieldset>
@@ -110,7 +110,7 @@ function App() {
                 <input className="form__input form__input_text-avatar_link"
                   type="url" name="link"
                   placeholder="Ссылка&nbsp;на&nbsp;аватар" required
-                  id="avatar"/>
+                  id="avatar" />
                 <span className="form__input-error avatar-error"></span>
               </label>
             </fieldset>

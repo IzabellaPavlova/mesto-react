@@ -21,8 +21,11 @@
 
 ## Инструкция по установке:
 1. Клонировать репозиторий (SSH)
+
 `git clone git@github.com:IzabellaPavlova/mesto-react.git`
 2. Установить зависимости
+
 `npm install`
 3. Запустить локально
+
 `npm start`

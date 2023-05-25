@@ -38,11 +38,8 @@ function Main(props) {
           {
             cards.map((card, id) => (
               <Card
-                key={id}
+                key={card._id}
                 card={card}
-                title={card.name}
-                imageSrc={card.link}
-                likesNum={card.likes.length}
                 onCardClick={props.onCardClick}
               />
             ))

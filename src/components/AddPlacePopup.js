@@ -5,6 +5,13 @@ function AddPlacePopup(props) {
   const [name, setName] = React.useState('');
   const [link, setLink] = React.useState('');
 
+  React.useEffect(() => {
+    if (props.isOpen) {
+      setName('');
+      setLink('');
+    }
+  }, [props.isOpen]);
+
   function handleNameChange(evt) {
     setName(evt.target.value);
   }
@@ -20,7 +27,7 @@ function AddPlacePopup(props) {
     });
   }
 
-  return(
+  return (
     <PopupWithForm
       isOpen={props.isOpen}
       onClose={props.onClose}
@@ -34,14 +41,14 @@ function AddPlacePopup(props) {
           <input className="form__input form__input_text-add-card_name"
             type="text" name="name" placeholder="Название"
             required
-            minLength="2" maxLength="30" id="card-name" onChange={handleNameChange} />
+            minLength="2" maxLength="30" id="card-name" onChange={handleNameChange} value={name} />
           <span className="form__input-error card-name-error"></span>
         </label>
         <label className="form__field">
           <input className="form__input form__input_text-add-card_link"
             type="url" name="link"
             placeholder="Ссылка&nbsp;на&nbsp;картинку" required
-            id="card-description" onChange={handleLinkChange} />
+            id="card-description" onChange={handleLinkChange} value={link} />
           <span className="form__input-error card-description-error"></span>
         </label>
       </fieldset>

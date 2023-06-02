@@ -2,8 +2,10 @@ import React from 'react';
 import Header from './Header.js';
 import Footer from './Footer.js';
 import Main from './Main.js';
-import PopupWithForm from './PopupWithForm.js';
 import ImagePopup from './ImagePopup.js';
+import EditProfilePopup from './EditProfilePopup.js';
+import EditAvatarPopup from './EditAvatarPopup.js';
+import AddPlacePopup from './AddPlacePopup.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import api from '../utils/api.js';
 
@@ -24,16 +26,47 @@ function App() {
     });
   }, [])
 
+  // Profile
+
   function handleEditProfileClick() {
     setIsProfilePopupOpen(true);
   }
+
+  function handleUpdateUser(data) {
+    api.updateUserInfo(data).then((newUserInfo) => {
+      setCurrentUser(newUserInfo);
+      closeAllPopups();
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+
+  function handleEditAvatarClick() {
+    setIsAvatarPopupOpen(true);
+  }
+
+  function handleUpdateAvatar(data) {
+    api.updateProfileAvatar(data).then((newUserInfo) => {
+      setCurrentUser(newUserInfo);
+      closeAllPopups();
+    }).catch((err) => {
+      console.error(err);
+    });
+  }
+
+  // Cards
 
   function handleAddPlaceClick() {
     setIsAddCardPopupOpen(true);
   }
 
-  function handleEditAvatarClick() {
-    setIsAvatarPopupOpen(true);
+  function handleCreateCard(data) {
+    api.addNewCard(data).then((newCard) => {
+      setCards([newCard, ...cards]);
+      closeAllPopups();
+    }).catch((err) => {
+      console.error(err);
+    });
   }
 
   function handleCardClick(card) {
@@ -89,73 +122,23 @@ function App() {
           />
           <Footer />
 
-          <PopupWithForm
+          <EditProfilePopup
             isOpen={isProfilePopupOpen}
             onClose={closeAllPopups}
-            name={'profile'}
-            title={'Редактировать профиль'}
-            buttonText={'Сохранить'}
-          >
-            <fieldset className="form__input-container">
-              <label className="form__field">
-                <input className="form__input form__input_text-profile_name"
-                  type="text" name="name" placeholder="Имя" required
-                  minLength="2" maxLength="40" id="profile-name" />
-                <span className="form__input-error profile-name-error"></span>
-              </label>
-              <label className="form__field">
-                <input className="form__input form__input_text-profile_description"
-                  type="text" name="description" placeholder="Описание"
-                  required minLength="2" maxLength="200"
-                  id="profile-description" />
-                <span className="form__input-error profile-description-error">Error
-                  is here</span>
-              </label>
-            </fieldset>
-          </PopupWithForm>
+            onSubmit={handleUpdateUser}
+          />
 
-          <PopupWithForm
+          <AddPlacePopup
             isOpen={isAddCardPopupOpen}
             onClose={closeAllPopups}
-            name={'add-card'}
-            title={'Новое место'}
-            buttonText={'Создать'}
-          >
-            <fieldset className="form__input-container">
-              <label className="form__field">
-                <input className="form__input form__input_text-add-card_name"
-                  type="text" name="name" placeholder="Название"
-                  required
-                  minLength="2" maxLength="30" id="card-name" />
-                <span className="form__input-error card-name-error"></span>
-              </label>
-              <label className="form__field">
-                <input className="form__input form__input_text-add-card_link"
-                  type="url" name="link"
-                  placeholder="Ссылка&nbsp;на&nbsp;картинку" required
-                  id="card-description" />
-                <span className="form__input-error card-description-error"></span>
-              </label>
-            </fieldset>
-          </PopupWithForm>
+            onSubmit={handleCreateCard}
+          />
 
-          <PopupWithForm
+          <EditAvatarPopup
             isOpen={isAvatarPopupOpen}
             onClose={closeAllPopups}
-            name={'avatar'}
-            title={'Обновить аватар'}
-            buttonText={'Сохранить'}
-          >
-            <fieldset className="form__input-container">
-              <label className="form__field">
-                <input className="form__input form__input_text-avatar_link"
-                  type="url" name="link"
-                  placeholder="Ссылка&nbsp;на&nbsp;аватар" required
-                  id="avatar" />
-                <span className="form__input-error avatar-error"></span>
-              </label>
-            </fieldset>
-          </PopupWithForm>
+            onSubmit={handleUpdateAvatar}
+          />
 
           <ImagePopup
             card={selectedCard}

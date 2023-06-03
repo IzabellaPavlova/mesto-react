@@ -1,16 +1,16 @@
-import React from 'react';
+import { useContext, useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function EditProfilePopup(props) {
-  const currentUser = React.useContext(CurrentUserContext);
-  const [name, setName] = React.useState('');
-  const [description, setDescription] = React.useState('');
+  const currentUser = useContext(CurrentUserContext);
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
 
-  React.useEffect(() => {
+  useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, props.isOpen]);
 
   function handleNameChange(evt) {
     setName(evt.target.value);
@@ -41,14 +41,14 @@ function EditProfilePopup(props) {
         <label className="form__field">
           <input className="form__input form__input_text-profile_name"
             type="text" name="name" placeholder="Имя" required
-            minLength="2" maxLength="40" id="profile-name" onChange={handleNameChange} value={name} />
+            minLength="2" maxLength="40" id="profile-name" onChange={handleNameChange} value={name || ''} />
           <span className="form__input-error profile-name-error"></span>
         </label>
         <label className="form__field">
           <input className="form__input form__input_text-profile_description"
             type="text" name="description" placeholder="Описание"
             required minLength="2" maxLength="200"
-            id="profile-description" onChange={handleDescriptionChange} value={description} />
+            id="profile-description" onChange={handleDescriptionChange} value={description || ''} />
           <span className="form__input-error profile-description-error">Error
             is here</span>
         </label>

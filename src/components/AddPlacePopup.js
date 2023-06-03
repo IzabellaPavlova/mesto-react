@@ -1,11 +1,11 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function AddPlacePopup(props) {
-  const [name, setName] = React.useState('');
-  const [link, setLink] = React.useState('');
+  const [name, setName] = useState('');
+  const [link, setLink] = useState('');
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (props.isOpen) {
       setName('');
       setLink('');
@@ -41,14 +41,14 @@ function AddPlacePopup(props) {
           <input className="form__input form__input_text-add-card_name"
             type="text" name="name" placeholder="Название"
             required
-            minLength="2" maxLength="30" id="card-name" onChange={handleNameChange} value={name} />
+            minLength="2" maxLength="30" id="card-name" onChange={handleNameChange} value={name || ''} />
           <span className="form__input-error card-name-error"></span>
         </label>
         <label className="form__field">
           <input className="form__input form__input_text-add-card_link"
             type="url" name="link"
             placeholder="Ссылка&nbsp;на&nbsp;картинку" required
-            id="card-description" onChange={handleLinkChange} value={link} />
+            id="card-description" onChange={handleLinkChange} value={link || ''} />
           <span className="form__input-error card-description-error"></span>
         </label>
       </fieldset>

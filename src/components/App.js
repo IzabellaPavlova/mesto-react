@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import Header from './Header.js';
 import Footer from './Footer.js';
 import Main from './Main.js';
@@ -10,14 +10,14 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import api from '../utils/api.js';
 
 function App() {
-  const [isProfilePopupOpen, setIsProfilePopupOpen] = React.useState(false)
-  const [isAddCardPopupOpen, setIsAddCardPopupOpen] = React.useState(false)
-  const [isAvatarPopupOpen, setIsAvatarPopupOpen] = React.useState(false)
-  const [selectedCard, setSelectedCard] = React.useState(null)
-  const [currentUser, setCurrentUser] = React.useState({});
-  const [cards, setCards] = React.useState([]);
+  const [isProfilePopupOpen, setIsProfilePopupOpen] = useState(false)
+  const [isAddCardPopupOpen, setIsAddCardPopupOpen] = useState(false)
+  const [isAvatarPopupOpen, setIsAvatarPopupOpen] = useState(false)
+  const [selectedCard, setSelectedCard] = useState(null)
+  const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()]).then(([userData, cards]) => {
       setCurrentUser(userData);
       setCards(cards);
